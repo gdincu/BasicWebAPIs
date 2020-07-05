@@ -16,6 +16,7 @@ using BasicWebAPI.Domain;
 using System.Reflection;
 using System.IO;
 using Microsoft.OpenApi.Models;
+using FileContextCore;
 
 namespace BasicWebAPI
 {
@@ -32,7 +33,9 @@ namespace BasicWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(opt =>
-               opt.UseInMemoryDatabase("CarsList"));
+            //same as optionsBuilder.UseFileContextDatabase<JSONSerializer, DefaultFileManager>();
+            opt.UseFileContextDatabase(location: @"E:\2 - 9_InterviuPrep\BasicWebAPI\Persistence"));
+
             services.AddControllers();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
