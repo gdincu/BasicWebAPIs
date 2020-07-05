@@ -34,9 +34,8 @@ namespace BasicWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationContext>(opt =>
-            //same as optionsBuilder.UseFileContextDatabase<JSONSerializer, DefaultFileManager>();
-            opt.UseFileContextDatabase(location: @"E:\2 - 9_InterviuPrep\BasicWebAPI\Persistence"));
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Car")));
 
             services.AddControllers();
 
