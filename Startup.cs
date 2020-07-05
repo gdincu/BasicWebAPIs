@@ -33,6 +33,7 @@ namespace BasicWebAPI
         {
             services.AddDbContext<ApplicationContext>(opt =>
                opt.UseInMemoryDatabase("CarsList"));
+
             services.AddControllers();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
