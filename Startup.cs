@@ -17,6 +17,8 @@ using System.Reflection;
 using System.IO;
 using Microsoft.OpenApi.Models;
 using FileContextCore;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 namespace BasicWebAPI
 {
@@ -38,8 +40,15 @@ namespace BasicWebAPI
 
             services.AddControllers();
 
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen();
+            services.AddMvc()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CarValidator>()); //In order for ASP.NET to discover the validators
+            //.AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+
+            //Manually registering validators
+            services.AddTransient<CarValidator>();
+
+            services.AddSwaggerGen(); // Register the Swagger generator, defining 1 or more Swagger documents                                 
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

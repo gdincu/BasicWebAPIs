@@ -2,23 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FluentValidation;
 
 namespace BasicWebAPI.Domain
 {
-    class CarValidator
+    class CarValidator : AbstractValidator<CarDTO>
     {
-        public void validate(Car car)
+        public CarValidator()
         {
-            double price = car.Price;
-            String errors = "";
+            RuleFor(x => x.id).NotNull();
+            //RuleFor(x => x.Deadline).GreaterThan(DateTime.Now);
+            RuleFor(x => x.acceleration).LessThanOrEqualTo(100);
+            RuleFor(x => x.braking).LessThanOrEqualTo(100);
 
-            if (price < 0)
-                errors += "The price needs to be positive\n";
-
-            if (!errors.Equals(""))
-            {
-                throw new Exception(errors);
-            }
         }
 
     }

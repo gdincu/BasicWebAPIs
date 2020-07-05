@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -8,7 +9,14 @@ namespace BasicWebAPI
    public class Car: ICar
     {
         int id { get; set; } //field
+        
+
+        [Required]
+        [StringLength(15)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
         string name { get; set; }
+
+        [Range(1880, 2020)]
         int year { get; set; }
         double price { get; set; }
         int acceleration { get; set; }
